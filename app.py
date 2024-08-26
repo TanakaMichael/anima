@@ -21,15 +21,16 @@ def webhook():
     if data.get('ref') == 'refs/heads/master':
         try:
             # Gitリポジトリを最新に更新
-            subprocess.run(['git', 'pull'], cwd='/home/ubuntu/myflaskapp', check=True)
+            subprocess.run(['/usr/bin/git', 'pull'], cwd='/home/ubuntu/myflaskapp', check=True)
             # Flaskアプリケーションを再起動
             subprocess.run(['sudo', 'systemctl', 'restart', 'myflaskapp'], check=True)
             return "Success", 200
         except subprocess.CalledProcessError as e:
             # もしGit pullやアプリケーションの再起動に失敗した場合、エラーメッセージを返す
             print(f"Error during webhook processing: {e}")
-            return "Error during webhook processing", 500
+            return f"Error during webhook processing: {str(e)}", 500
     else:
         return "No action needed", 200
+    
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
