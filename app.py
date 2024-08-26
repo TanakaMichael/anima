@@ -27,10 +27,17 @@ def webhook():
             env = os.environ.copy()
             env['PATH'] = '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
             try:
-                subprocess.run(['/bin/systemctl', 'restart', 'myflaskapp'], cwd='/home/ubuntu/myflaskapp', check=True, env=env)
-                print("Service restart succeeded.")
+                result = subprocess.run(
+                    ['/bin/systemctl', 'restart', 'myflaskapp'],
+                    cwd='/home/ubuntu/myflaskapp',
+                    check=True,
+                    capture_output=True,
+                    text=True,
+                    env=env
+                )
+                print(f"Service restart succeeded: {result.stdout}")
             except subprocess.CalledProcessError as e:
-                print(f"Service restart failed: {e}")
+                print(f"Service restart failed: {e.stderr}")
             return "Success", 200
         except subprocess.CalledProcessError as e:
             # もしGit pullやアプリケーションの再起動に失敗した場合、エラーメッセージを返す
