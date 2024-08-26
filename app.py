@@ -23,7 +23,7 @@ def webhook():
             print(f"Git pull output: {result.stdout}")
             print(f"Git pull error: {result.stderr}")
             # Flaskアプリケーションを再起動
-            subprocess.run(['sudo', 'systemctl', 'restart', 'myflaskapp'], check=True)
+            subprocess.run(['/bin/systemctl', 'restart', 'myflaskapp'], check=True)
             return "Success", 200
         except subprocess.CalledProcessError as e:
             # もしGit pullやアプリケーションの再起動に失敗した場合、エラーメッセージを返す
