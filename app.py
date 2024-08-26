@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 import os
 import subprocess
 
@@ -11,18 +11,16 @@ def hello_world():
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
-    if request.method == 'POST':
-        # GitHub Webhookからのリクエストを受け取り
-        payload = request.json
-        # リポジトリのパスに移動
-        os.chdir('/home/ubuntu/myflaskapp')
-        # リポジトリを最新にプル
-        subprocess.run(['git', 'pull'])
-        # 必要に応じてアプリケーションを再起動
-        subprocess.run(['sudo', 'systemctl', 'restart', 'myflaskapp'])
-        return 'Success', 200
+    data = request.get_json()  # ここでrequestを使用
+    if data is None:
+        return "Invalid data", 400
+    # デバッグ用に受信したデータをプリント
+    print(data)
+    if data.get('ref') == 'refs/heads/master':
+        # Git pull やその他のアクションを実行
+        return "Success", 200
     else:
-        return 'Failed', 400
+        return "No action needed", 200
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
