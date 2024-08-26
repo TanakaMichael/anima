@@ -1,3 +1,4 @@
+import os
 import subprocess
 from flask import Flask, render_template, request, jsonify
 
@@ -23,7 +24,13 @@ def webhook():
             print(f"Git pull output: {result.stdout}")
             print(f"Git pull error: {result.stderr}")
             # Flaskアプリケーションを再起動
-            subprocess.run(['/bin/systemctl', 'restart', 'myflaskapp'], cwd='/home/ubuntu/myflaskapp', check=True)
+            env = os.environ.copy()
+            env['PATH'] = '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
+            try:
+                subprocess.run(['/bin/systemctl', 'restart', 'myflaskapp'], cwd='/home/ubuntu/myflaskapp', check=True, env=env)
+                print("Service restart succeeded.")
+            except subprocess.CalledProcessError as e:
+                print(f"Service restart failed: {e}")
             return "Success", 200
         except subprocess.CalledProcessError as e:
             # もしGit pullやアプリケーションの再起動に失敗した場合、エラーメッセージを返す
