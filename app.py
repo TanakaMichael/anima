@@ -1,12 +1,16 @@
 import os
 import subprocess
 from flask import Flask, render_template, request, jsonify
-
+import random
 app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
     return render_template('index.html')
+
+@app.route('/lain')
+def lain():
+    return render_template('lain.html')
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
@@ -48,5 +52,18 @@ def webhook():
     else:
         return "No action needed", 200
 
+@app.route('/lain/add', methods=['POST'])
+def lain_add():
+    # GIF画像のパス
+    image_url = '/static/images/lain.gif'
+
+    # ランダムな座標を生成
+    position = {
+        'left': random.randint(0, 100),  # 0%から90%の範囲で左位置を決定
+        'top': random.randint(0, 100)  # 0%から90%の範囲で上位置を決定
+    }
+
+    return jsonify(image_url=image_url, position=position)
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

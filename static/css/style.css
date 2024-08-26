@@ -1,0 +1,38 @@
+.gif-image {
+    position: absolute;
+    width: 300px;
+    height: 210px;
+    transform: translate(-50%, -50%); /* 画像の中心を指定された座標に配置 */
+}
+.lain_btn{
+    border-radius: 8px;
+    display: flex;
+    max-width: 220px;
+    color: #FFF;
+    transition: 0.3s ease-in-out;
+    font-weight: 600;
+    background: rgb(149,202,252);
+    background: linear-gradient(270deg, rgba(149,202,252,1) 0%, rgba(107,182,255,1) 100%);
+    position: absolute;
+    bottom: 20px; /* 真ん中より少し下に固定 */
+    transform: translateX(-50%);
+    left: 50%;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    z-index: 1000;
+}
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    background-image: url('/static/images/background.jpg'); /* 背景画像のパス */
+    background-size: cover; /* 画像を画面にフィットさせる */
+    background-position: center; /* 画像を中央に配置 */
+    background-repeat: no-repeat; /* 画像の繰り返しを防止 */
+}
