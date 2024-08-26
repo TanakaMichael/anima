@@ -1,5 +1,5 @@
 # app.py
-from flask import Flask
+from flask import Flask, render_template
 import os
 import subprocess
 
@@ -7,7 +7,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World! This is a test update. os ubuntu, app flask and Python! 何が問題なのかわからない...多分動いてる動いて。。たのむfe'
+    return render_template('index.html')
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
