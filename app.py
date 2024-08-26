@@ -9,8 +9,6 @@ app = Flask(__name__)
 def hello_world():
     return 'Hello, World! This is a test update. os ubuntu, app flask and Python! 何が問題なのかわからない...多分動いてる動いて。。たのむfe'
 
-app = Flask(__name__)
-
 @app.route('/webhook', methods=['POST'])
 def webhook():
     if request.method == 'POST':
