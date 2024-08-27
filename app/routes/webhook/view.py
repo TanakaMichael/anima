@@ -1,33 +1,22 @@
-import os
+from flask import Blueprint, request
 import subprocess
-from flask import Flask, render_template, request, jsonify
-import random
-app = Flask(__name__)
+import os
 
-@app.route('/')
-def hello_world():
-    return render_template('index.html')
+webhook_bp = Blueprint('webhook', __name__)
 
-@app.route('/lain')
-def lain():
-    return render_template('lain.html')
-
-@app.route('/webhook', methods=['POST'])
+@webhook_bp.route('/webhook', methods=['POST'])
 def webhook():
     data = request.get_json()
     if data is None:
         return "Invalid data", 400
     
-    # デバッグ用に受信したデータをプリント
     print(data)
     
     if data.get('ref') == 'refs/heads/master':
         try:
-            # Gitリポジトリを最新に更新
             result = subprocess.run(['/usr/bin/git', 'pull'], cwd='/home/ubuntu/myflaskapp', check=True, capture_output=True, text=True)
             print(f"Git pull output: {result.stdout}")
             print(f"Git pull error: {result.stderr}")
-            # Flaskアプリケーションを再起動
             env = os.environ.copy()
             env['PATH'] = '/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'
             try:
@@ -44,26 +33,9 @@ def webhook():
                 print(f"Service restart failed: {e.stderr}")
             return "Success", 200
         except subprocess.CalledProcessError as e:
-            # もしGit pullやアプリケーションの再起動に失敗した場合、エラーメッセージを返す
             print(f"Error during webhook processing: {e}")
             print(f"Git pull output: {e.output}")
             print(f"Git pull stderr: {e.stderr}")
             return f"Error during webhook processing: {str(e)}", 500
     else:
         return "No action needed", 200
-
-@app.route('/lain/add', methods=['POST'])
-def lain_add():
-    # GIF画像のパス
-    image_url = '/static/images/lain.gif'
-
-    # ランダムな座標を生成
-    position = {
-        'left': random.randint(0, 100),  # 0%から90%の範囲で左位置を決定
-        'top': random.randint(0, 100)  # 0%から90%の範囲で上位置を決定
-    }
-
-    return jsonify(image_url=image_url, position=position)
-
-if __name__ == '__main__':
-    app.run()
