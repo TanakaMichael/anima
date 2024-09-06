@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メールアドレス確認</title>
+</head>
+<body>
+    <h1>こんにちは {{ user.username }} さん</h1>
+    <p>登録してくれてありがとう！</p>
+    <p>このメールは、メールアドレスの確認を行うために送信されました。</p>
+    <p>確認はこちらのリンクからお願いしますm(._.)m</p>
+    <a href="{{ url_for('user.email_confirmation', token=token, _external=True) }}">メールアドレス確認</a>
+    <p>いつもありがとう! ...間違えたこれからよろしく</p>
+</body>
+</html>

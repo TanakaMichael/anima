@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<!--ユーザーへのサイト説明です。-->
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='gate/css/styles.css')}}">
+</head>
+
+<body>
+    <script>
+    </script>
+    <div>
+        <a href="{{ url_for('static', filename='gate/css/styles.css')}}" alt="title image [多分表示されていない]"></a>
+        <!-- ナビゲーションバー -->
+    <div class="navbar" id="navbar">
+        <div class="logo" ><a href="{{url_for('user.gate')}}">Past Relics</a></div>
+            <div class="nav-links">
+                <a href="{{ url_for('user.about') }}">About</a>
+                <a href="{{ url_for('user.document') }}">Document</a>
+                <a href="{{ url_for('user.policy') }}">Policy</a>
+                <a href="#login">Login</a>
+                <a href="#register">Register</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- メインコンテンツ -->
+    <div class="content">
+        <h1>Past Relics</h1>
+        <p>ようこそ！</p>
+        <p>ログインか登録を選んでください！</p>
+        <a href="{{ url_for('user.login')}}" class="button">ログイン</a><span>  </span><a href="{{ url_for('user.register')}}" class="button">登録</a>
+        <p>初めての方でよくわからないって方は<a href="{{ url_for('user.about')}}">こちらへ</a>どうぞ</p>
+
+    </div>
+    <script src="{{ url_for('static', filename='gate/js/script.js')}}"></script>
+</body>
+</html>

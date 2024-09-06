@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Past Relics - Date Search</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #00ff00;
+            font-family: "Courier New", Courier, monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        .search-box {
+            display: inline-block;
+            text-align: left;
+        }
+        .search-box input[type="text"] {
+            width: 300px;
+            padding: 10px;
+            background-color: #333;
+            border: 1px solid #555;
+            color: #00ff00;
+            font-size: 16px;
+            margin-bottom: 10px;
+            caret-color: #00ff00;
+        }
+        .search-box button {
+            padding: 10px 20px;
+            background-color: #555;
+            border: 1px solid #777;
+            color: #00ff00;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .search-box button:hover {
+            background-color: #777;
+        }
+        .footer {
+            position: absolute;
+            bottom: 10px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #666;
+        }
+        .menu {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+        .menu button {
+            background-color: #333;
+            border: none;
+            color: #00ff00;
+            font-size: 20px;
+            cursor: pointer;
+        }
+        .menu-content {
+            display: none;
+            position: absolute;
+            top: 40px;
+            left: 10px;
+            background-color: #333;
+            border: 1px solid #555;
+            padding: 10px;
+            z-index: 1;
+            width: 200px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+        .menu-content a {
+            color: #00ff00;
+            text-decoration: none;
+            display: block;
+            padding: 8px 10px;
+            font-size: 14px;
+            border-bottom: 1px solid #555;
+        }
+        .menu-content a:hover {
+            background-color: #444;
+        }
+        .flash-message {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .flash-message.danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .flash-message.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .flash-message.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="menu">
+        <button onclick="toggleMenu()">☰</button>
+        <div class="menu-content" id="menuContent">
+            <a href="{{ url_for('game.profile') }}">プロフィール</a>
+            <a href="#">検索履歴</a>
+            <a href="#">ヘルプ</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>PAST RELICS</h1>
+        <div class="search-box">
+            <form onsubmit="redirectToDatePage(event)">
+                <input type="text" id="date-input" name="date" placeholder="Enter YYYYMMDD eg :20241224">
+                <button type="submit">検索</button>
+            </form>
+        </div>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <p class="{{ category }}">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <a href="{{ url_for('game.view_log', date='2024-12-24') }}">{{ page_name }}</a>
+                {% if page_key in acquired_keys %}
+                    - <span>取得済み</span>
+                {% else %}
+                    - <a href="{{ url_for('game.grant_key', page_key='2024-12-24') }}">取得</a>
+                {% endif %}
+    </div>
+    <div class="footer">
+        <p>現在のバージョン: {{ current_user.version }}</p>
+        <p>&copy; 2024 PAST RELICS. All Rights Reserved.</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='past-relics/js/script.js') }}"></script>
+</body>
+</html>

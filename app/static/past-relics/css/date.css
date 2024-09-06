@@ -1,0 +1,88 @@
+/* ベーススタイルのリセット */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #00ff00;
+    line-height: 1.6;
+}
+
+/* Container */
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+}
+
+/* Header */
+header {
+    background: #333;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-button {
+    color: #00ff00;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.home-button:hover {
+    color: #fff;
+}
+
+.title {
+    font-size: 24px;
+    text-align: center;
+    color: #00ff00;
+}
+
+/* Main Content */
+main .container {
+    background: #222;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+/* Footer */
+footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 12px;
+    color: #666;
+}
+
+/* リンクのスタイル */
+.result-title:link {
+    color: #00FF00;  /* 明るい緑 */
+    text-decoration: none;
+}
+
+.result-title:visited {
+    color: #7a7a7a;  /* 灰色がかった白 */
+    text-decoration: none;
+}
+
+.result-title:hover {
+    color: #FFFFFF;  /* ホバー時は純粋な白 */
+    text-decoration: underline;
+}
+
+.result-title:active {
+    color: #FFFFFF;  /* アクティブ時も白 */
+    text-decoration: underline;
+}

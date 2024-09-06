@@ -1,0 +1,70 @@
+<!-- templates/past-relics/profile.html -->
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ user.username }} のプロフィール</title>
+    <style>
+        body {
+            background-color: #1a1a1a;
+            color: #e0e0e0;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            text-align: center;
+            color: #f0ad4e;
+        }
+        .profile-info {
+            margin-top: 20px;
+        }
+        .profile-info div {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #444;
+            border-radius: 5px;
+        }
+        .profile-info div span {
+            font-weight: bold;
+            color: #f0ad4e;
+        }
+        .back-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .back-link a {
+            color: #f0ad4e;
+            text-decoration: none;
+        }
+        .back-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ user.username }} のプロフィール</h1>
+        <div class="profile-info">
+            <div><span>ユーザー名:</span> {{ user.username }}</div>
+            <div><span>メールアドレス:</span> {{ user.email }}</div>
+            <div><span>version:</span> {{ user.version }}.0v</div>
+            <div><span>chat_system:</span> {{ '有効' if user.chat_version else '無効' }}</div>
+            <div><span>community_system:</span> {{ '有効' if user.community_version else '無効' }}</div>
+            <div><span>news_system:</span> {{ '有効' if user.news_version else '無効' }}</div>
+            <div><span>voice_system:</span> {{ '有効' if user.voice_version else '無効' }}</div>
+        </div>
+        <div class="back-link">
+            <a href="{{ url_for('game.index') }}">ホームに戻る</a>
+        </div>
+    </div>
+</body>
+</html>

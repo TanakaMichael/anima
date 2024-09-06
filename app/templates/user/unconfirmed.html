@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メールアドレス確認</title>
+</head>
+<body>
+    <h1>メールアドレス確認</h1>
+    <p>メールアドレスの確認を行うために、メールを送信しました。</p>
+    <p>メールを確認して、メールアドレスの確認を行ってください。</p>
+    <p>メールが届かない場合は、<a href="{{ url_for('resend_confirmation') }}">こちら</a>をクリックしてください。</p>
+    <p>確認が完了した場合サイトにリダイレクトされます</p>
+
+    <script>
+        // 5秒ごとに確認済みかどうかをチェック
+        setInterval(function() {
+            fetch("{{ url_for('check_confirmation') }}")
+                .then(response => response.json())
+                .then(data => {
+                    if (data.confirmed) {
+                        window.location.href = "{{ url_for('game.index') }}";
+                    }
+                });
+        }, 5000);
+    </script>
+</body>
+</html>

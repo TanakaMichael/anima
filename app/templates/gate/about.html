@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!--ユーザーへのサイト説明です。-->
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gate</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='gate/css/styles.css')}}">
+</head>
+<body>
+    <script>
+    </script>
+    <div>
+        <a href="{{ url_for('static', filename='gate/css/styles.css')}}" alt="title image [多分表示されていない]"></a>
+        <!-- ナビゲーションバー -->
+    <div class="navbar" id="navbar">
+        <div class="logo" ><a href="{{url_for('user.gate')}}">Past Relics</a></div>
+            <div class="nav-links">
+                <a href="{{ url_for('user.about') }}">About</a>
+                <a href="{{ url_for('user.document') }}">Document</a>
+                <a href="{{ url_for('user.policy') }}">Policy</a>
+                <a href="#login">Login</a>
+                <a href="#register">Register</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- メインコンテンツ -->
+    <div class="content">
+        <h1>About</h1>
+        <p>このサイトへようこそ。このウェブサイトは、ある未来の世界から送られてきたかのような、独自の体験を提供します。サイトの利用にあたって、いくつかの重要なポイントをご説明します。</p>
+
+        <h2>登録必須</h2>
+        <p>まず、このサイトではアカウントの作成が必要です。アカウント作成とともに、あなたのゲームが始まります。</p>
+
+        <h2>ダークな雰囲気</h2>
+        <p>このサイトは非常にダークで、少し不気味な雰囲気を持っています。恐怖心を感じるかもしれませんが、その点については事前にご了承ください。なお、驚かせるような演出（ジャンプスケア）はほとんどありませんのでご安心ください。</p>
+
+        <h2>セキュリティについて</h2>
+        <p>ユーザーの情報は万全のセキュリティ体制で保護されていますが、万が一を考慮して、他のサイトと同じパスワードは使用しないでください。当サイトは個人情報を不正に収集したり、ウイルスを仕込んだりすることは一切ありません。安心してご利用ください。</p>
+
+        <h2>正規のドメイン</h2>
+        <p>このサイトの正規ドメインは「past-relics.org」および「yuusya.xyz」のみです。その他のドメインからのアクセスにはご注意ください。</p>
+
+        <h2>JavaScriptの使用について</h2>
+        <p>このサイトはJavaScriptを多用しています。もしサイトがうまく動作しない場合は、お使いのブラウザでJavaScriptがフルに利用できるよう設定を確認し、必要に応じて変更してください。</p>
+
+        <h1>ゲームの概要</h1>
+        <p>あなたは遠い未来の世界で、古いコンピューターを使って過去のインターネットにアクセスします。そこには、かつての様々なニュースや掲示板が存在しています。</p>
+        <p>検索エンジンを使用して、日付を入力し、過去の出来事を探ってください。何を検索したら良いか迷ったら、ドキュメントにヒントがありますので、ご利用ください。</p>
+        <p>まずは「2052年12月24日」を検索してみてください。これが最初の手がかりです。</p>
+    </div>
+    <script src="{{ url_for('static', filename='gate/js/script.js')}}"></script>
+</body>
+</html>

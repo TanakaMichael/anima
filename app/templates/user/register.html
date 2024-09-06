@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="jp">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='user/css/register.css') }}">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>登録フォーム</h2>
+        <form method="POST" action="{{ url_for('user.register') }}">
+            {{ form.hidden_tag() }}
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                {{ form.username(class_="form-control", placeholder="Name") }}
+            </div>
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                {{ form.email(class_="form-control", placeholder="Email") }}
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                {{ form.password(class_="form-control", placeholder="Password") }}
+            </div>
+            <div class="input-group">
+                <i class="fas fa-lock"></i>
+                {{ form.confirm_password(class_="form-control", placeholder="Confirm Password") }}
+            </div>
+            <button type="submit" class="btn btn-primary">登録</button>
+        </form>
+        {% for field, errors in form.errors.items() %}
+    <div class="alert alert-danger">
+        {% for error in errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endfor %}
+    </div>
+    
+</body>
+</html>

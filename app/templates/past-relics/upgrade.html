@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>バージョンアップ中...</title>
+    <style>
+        /* 簡単な演出のスタイル */
+        body {
+            background-color: black;
+            color: lime;
+            font-family: "Courier New", Courier, monospace;
+            text-align: center;
+            padding-top: 20%;
+        }
+        .loading {
+            font-size: 24px;
+            animation: blink 1s step-start infinite;
+        }
+        @keyframes blink {
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1>バージョンアップ中...</h1>
+    <p class="loading">データを更新しています...</p>
+    <form id="upgrade-form" action="{{ url_for('game.perform_upgrade') }}" method="post">
+        {{ form.hidden_tag() }}
+        <input type="hidden" name="upgrade" value="1">
+    </form>
+    <script>
+        // 演出の後に自動でバージョンアップを実行する
+        setTimeout(function() {
+            document.getElementById('upgrade-form').submit();
+        }, 3000); // 3秒後に実行
+    </script>
+</body>
+</html>

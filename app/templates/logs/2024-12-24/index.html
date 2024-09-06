@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ date }} のログ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='past-relics/css/date.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <a href="{{ url_for('game.index') }}" class="home-button">ホーム</a>
+            <h1 class="title">{{ date }} のログ</h1>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            {% if community_available %}
+            <div class="search-result">
+                <div class="result-info">
+                    <i class="fas fa-comments result-icon"></i>
+                    <a href="{{ url_for('game.view_log_content', date=date, content='community') }}" class="result-title">2.1ch (Community)</a>
+                    <p class="result-description"></p>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if chat_available %}
+            <div class="search-result">
+                <i class="fas fa-comment-dots result-icon"></i>
+                <div class="result-info">
+                    <a href="{{ url_for('game.view_log_content', date=date, content='chat') }}" class="result-title">チャット (Chat)</a>
+                    <p class="result-description">この日のチャットログを確認できます。</p>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if news_available %}
+            <div class="search-result">
+                <div class="result-info">
+                    <i class="fas fa-newspaper result-icon"></i>
+                    <a href="{{ url_for('game.view_log_content', date=date, content='news') }}" class="result-title">ニュース21 (News)</a>
+                    <p class="result-description">この日のニュースを確認できます。</p>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if voice_available %}
+            <div class="search-result">
+                <div class="result-info">
+                    <i class="fas fa-microphone result-icon"></i>
+                    <a href="{{ url_for('game.view_log_content', date=date, content='voice') }}" class="result-title">Voice (Voice)</a>
+                    <p class="result-description">この日の音声文字起こしログを確認できます。</p>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>バージョン: {{ current_user.version }}</p>
+        </div>
+    </footer>
+</body>
+</html>
